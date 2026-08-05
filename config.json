@@ -1,0 +1,145 @@
+{
+  "options": [
+    {
+      "id": "start",
+      "title": {
+        "en": "Locate the Main TV and Main Console for the Basement Classroom",
+        "es": "Localice la TV principal y la consola principal para el salón de clases del sótano"
+      },
+      "steps": [
+        {
+          "instruction": {
+            "en": "The Main TV and Console should look something like this",
+            "es": "La TV principal y la consola deberían verse algo así"
+          },
+          "image": "base.MainTV.jpg",
+          "alt": {
+            "en": "Main TV and Console",
+            "es": "TV principal y consola"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Let's start from scratch, try to reset the console to start from the home screen",
+            "es": "Comencemos desde cero, intente restablecer la consola para comenzar desde la pantalla de inicio"
+          },
+          "video_url": "https://drive.google.com/file/d/1rTXYizEgxuyyc2vi1Umf8eEUBzjnhu9z/view?usp=sharing",
+          "alt": {
+            "en": "Video showing how to exit out of device mode and return to HOME",
+            "es": "Video que muestra cómo salir del modo dispositivo y regresar a HOME"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Next, let's activate 'Device Mode'",
+            "es": "A continuación, activemos el 'Modo Dispositivo'"
+          },
+          "image": "base.Main.DeviceMode.jpg",
+          "alt": {
+            "en": "Shows the button for Device Mode on the Main Console",
+            "es": "Muestra el botón para el Modo Dispositivo en la Consola Principal"
+          }
+        },
+        {
+          "instruction": {
+            "en": "If done successfully, your Main Console panel should look like this:",
+            "es": "Si se hizo correctamente, su panel de la Consola Principal debería verse así:"
+          },
+          "image": "base.Main.DeviceModeON.jpg",
+          "alt": {
+            "en": "What the Main Console looks like after activating Device Mode",
+            "es": "Cómo se ve la Consola Principal después de activar el Modo Dispositivo"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Now, let's turn our attention to the Main TV",
+            "es": "Ahora, centrémonos en la TV principal"
+          },
+          "image": "base.MainTV.jpg",
+          "alt": {
+            "en": "Picture showing the main TV off",
+            "es": "Imagen que muestra la TV principal apagada"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Is the TV on? If not, turn it on using the power button at the base of the TV",
+            "es": "¿Está encendida la TV? Si no, enciéndala usando el botón de encendido en la base de la TV"
+          },
+          "image": "base.MainTVON.jpg",
+          "alt": {
+            "en": "Picture of the TV powered on",
+            "es": "Imagen de la TV encendida"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Next, click on the Home Button at the base of the TV and switch the input to HDMI1",
+            "es": "A continuación, presione el botón de Inicio en la base de la TV y cambie la entrada a HDMI1"
+          },
+          "image": "base.MainTV.PCinput.jpg",
+          "alt": {
+            "en": "Pic showing the PC input option",
+            "es": "Imagen que muestra la opción de entrada de PC"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Now select HDMI1 as the input source",
+            "es": "Ahora seleccione HDMI1 como fuente de entrada"
+          },
+          "image": "base.MainTV.HDMI1.jpg",
+          "alt": {
+            "en": "Pic showing the HDMI1 input option",
+            "es": "Imagen que muestra la opción de entrada HDMI1"
+          }
+        },
+        {
+          "instruction": {
+            "en": "If you've reached this step, something that looks like a Windows Computer should be displaying! You can maximize the screen using this button:",
+            "es": "Si ha llegado a este paso, ¡debería estar mostrando algo que parece una computadora Windows! Puede maximizar la pantalla usando este botón:"
+          },
+          "image": "base.MainTV.ScreenMaximize.jpg",
+          "alt": {
+            "en": "Pic of the Maximize option for the Window",
+            "es": "Imagen de la opción Maximizar para la ventana"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Let's find the keyboard for the computer! The keyboard is usually at the front of the classroom",
+            "es": "¡Busquemos el teclado para la computadora! El teclado generalmente está al frente del salón de clases"
+          },
+          "image": "base.MainKeyboard.jpg",
+          "alt": {
+            "en": "Pic showing the Keyboard for the basement",
+            "es": "Imagen que muestra el teclado del sótano"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Make sure the keyboard is on!",
+            "es": "¡Asegúrese de que el teclado esté encendido!"
+          },
+          "image": "base.MainKeyboard.ON.jpg",
+          "alt": {
+            "en": "Pic showing the switch for Keyboard",
+            "es": "Imagen que muestra el interruptor del teclado"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Voila! You're ready to go! Now click on 'Other User' on the bottom left and sign into your profile!",
+            "es": "¡Voilá! ¡Está listo para continuar! Ahora haga clic en 'Otro usuario' en la parte inferior izquierda e inicie sesión en su perfil!"
+          },
+          "image": "base.OtherUser.finish.jpg",
+          "alt": {
+            "en": "Pic displaying the 'Other Users' log in screen on the Main TV",
+            "es": "Imagen que muestra la pantalla de inicio de sesión de 'Otros usuarios' en la TV principal"
+          }
+        }
+      ]
+    }
+  ]
+}
