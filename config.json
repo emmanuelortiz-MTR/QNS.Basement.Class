@@ -75,8 +75,19 @@
         },
         {
           "instruction": {
-            "en": "Next, click on the Home Button at the base of the TV and switch the input to HDMI1",
-            "es": "A continuación, presione el botón de Inicio en la base de la TV y cambie la entrada a HDMI1"
+            "en": "First, press the Home button on the TV remote or at the base of the TV",
+            "es": "Primero, presione el botón de Inicio en el control remoto o en la base de la TV"
+          },
+          "image": "base.MainTV.Home.jpg",
+          "alt": {
+            "en": "Pic showing the Home button",
+            "es": "Imagen que muestra el botón de Inicio"
+          }
+        },
+        {
+          "instruction": {
+            "en": "Next, navigate to and select the PC input option",
+            "es": "A continuación, navegue y seleccione la opción de entrada de PC"
           },
           "image": "base.MainTV.PCinput.jpg",
           "alt": {
