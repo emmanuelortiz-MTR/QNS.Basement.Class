@@ -45,7 +45,7 @@
             "en": "If done successfully, your Main Console panel should look like this:",
             "es": "Si se hizo correctamente, su panel de la Consola Principal debería verse así:"
           },
-          "image": "base.Main.DeviceModeON.jpg",
+          "image": "base.Main.DeviceModeON.JPG",
           "alt": {
             "en": "What the Main Console looks like after activating Device Mode",
             "es": "Cómo se ve la Consola Principal después de activar el Modo Dispositivo"
@@ -67,7 +67,7 @@
             "en": "Is the TV on? If not, turn it on using the power button at the base of the TV",
             "es": "¿Está encendida la TV? Si no, enciéndala usando el botón de encendido en la base de la TV"
           },
-          "image": "base.MainTVON.jpg",
+          "image": "base.MainTV.ON.jpg",
           "alt": {
             "en": "Picture of the TV powered on",
             "es": "Imagen de la TV encendida"
