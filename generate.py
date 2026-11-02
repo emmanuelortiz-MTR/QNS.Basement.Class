@@ -50,16 +50,39 @@ except json.JSONDecodeError as e:
 shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Copy static files if the folder exists
+# Copy static files securely
 if os.path.exists(STATIC_SRC):
-    shutil.copytree(STATIC_SRC, os.path.join(OUTPUT_DIR, "static"))
+    dest_static = os.path.join(OUTPUT_DIR, "static")
+    os.makedirs(dest_static, exist_ok=True)
+    
+    # Manually walk through the folders and copy files
+    for root, dirs, files in os.walk(STATIC_SRC):
+        # Figure out the destination path
+        rel_path = os.path.relpath(root, STATIC_SRC)
+        dest_dir = os.path.join(dest_static, rel_path) if rel_path != "." else dest_static
+        
+        os.makedirs(dest_dir, exist_ok=True)
+        
+        for file in files:
+            src_file = os.path.join(root, file)
+            dest_file = os.path.join(dest_dir, file)
+            shutil.copy2(src_file, dest_file)
+            
+    print("✅ Static files and images copied successfully.")
 else:
     print("⚠️  Warning: 'static/' folder not found – no media will be copied.")
 
 # ---------- HTML Templates ----------
+# Notice the cookie clearing script is ONLY in the INDEX_TEMPLATE
 INDEX_TEMPLATE = """<!DOCTYPE html>
 <html>
 <head>
+    <script>
+        document.cookie.split(";").forEach(function(c) {{ 
+            document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+        }});
+        localStorage.removeItem('preferredLanguage');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3rd Fl QNS Shared Space Guide</title>
@@ -77,7 +100,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
         }}
         .lang-toggle {{
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             background: #28a745;
             color: white;
@@ -103,10 +126,10 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <button class="lang-toggle" onclick="toggleLanguage()">🇨🇴 Español</button>
+    <button class="lang-toggle" onclick="toggleLanguage()">Español</button>
     <h1>
-        <span class="lang-en active">So you want to operate the Basement Classroom?</span>
-        <span class="lang-es">¿Quieres operar el salón de clases del sótano?</span>
+        <span class="lang-en active">So you want to operate the 2nd Fl Conference Room?</span>
+        <span class="lang-es">¿Quieres manejar la sala de conferencias del segundo piso?</span>
     </h1>
     <div id="content">
         {options_html}
@@ -118,10 +141,10 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
             const toggleBtn = document.querySelector('.lang-toggle');
             if (currentLang === 'en') {{
                 currentLang = 'es';
-                toggleBtn.textContent = '🇺🇸 English';
+                toggleBtn.textContent = 'English';
             }} else {{
                 currentLang = 'en';
-                toggleBtn.textContent = '🇨🇴 Español';
+                toggleBtn.textContent = 'Español';
             }}
             updateLanguage(currentLang);
         }}
@@ -143,7 +166,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
             const savedLang = localStorage.getItem('preferredLanguage') || 'en';
             currentLang = savedLang;
             if (savedLang === 'es') {{
-                document.querySelector('.lang-toggle').textContent = '🇺🇸 English';
+                document.querySelector('.lang-toggle').textContent = 'English';
             }}
             updateLanguage(savedLang);
         }});
@@ -152,6 +175,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
+# Notice the cookie clearing script is REMOVED from here
 STEP_TEMPLATE = """<!DOCTYPE html>
 <html>
 <head>
@@ -172,7 +196,7 @@ STEP_TEMPLATE = """<!DOCTYPE html>
         }}
         .lang-toggle {{
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             background: #28a745;
             color: white;
@@ -204,7 +228,7 @@ STEP_TEMPLATE = """<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <button class="lang-toggle" onclick="toggleLanguage()">🇨🇴 Español</button>
+    <button class="lang-toggle" onclick="toggleLanguage()">Español</button>
     <h1>
         <span class="lang-en active">{option_title_en}</span>
         <span class="lang-es">{option_title_es}</span>
@@ -219,7 +243,10 @@ STEP_TEMPLATE = """<!DOCTYPE html>
     <div class="nav">
         {prev_link}
         {next_link}
-        <a href="index.html">🏠 Home</a>
+        <a href="index.html" class="button">
+            <span class="lang-en active">🏠 Home</span>
+            <span class="lang-es">🏠 Inicio</span>
+        </a>
     </div>
     <script>
         let currentLang = 'en';
@@ -228,10 +255,10 @@ STEP_TEMPLATE = """<!DOCTYPE html>
             const toggleBtn = document.querySelector('.lang-toggle');
             if (currentLang === 'en') {{
                 currentLang = 'es';
-                toggleBtn.textContent = '🇺🇸 English';
+                toggleBtn.textContent = 'English';
             }} else {{
                 currentLang = 'en';
-                toggleBtn.textContent = '🇨🇴 Español';
+                toggleBtn.textContent = 'Español';
             }}
             updateLanguage(currentLang);
         }}
@@ -252,7 +279,7 @@ STEP_TEMPLATE = """<!DOCTYPE html>
             const savedLang = localStorage.getItem('preferredLanguage') || 'en';
             currentLang = savedLang;
             if (savedLang === 'es') {{
-                document.querySelector('.lang-toggle').textContent = '🇺🇸 English';
+                document.querySelector('.lang-toggle').textContent = 'English';
             }}
             updateLanguage(savedLang);
         }});
@@ -261,6 +288,7 @@ STEP_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
+# Notice the cookie clearing script is REMOVED from here
 CONGRATS_TEMPLATE = """<!DOCTYPE html>
 <html>
 <head>
@@ -272,7 +300,7 @@ CONGRATS_TEMPLATE = """<!DOCTYPE html>
         .button {{ display: inline-block; padding: 1rem 2rem; margin: 1rem 0; background: #28a745; color: white; text-decoration: none; border-radius: 8px; }}
         .lang-toggle {{
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             background: #28a745;
             color: white;
@@ -298,7 +326,7 @@ CONGRATS_TEMPLATE = """<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <button class="lang-toggle" onclick="toggleLanguage()">🇨🇴 Español</button>
+    <button class="lang-toggle" onclick="toggleLanguage()">Español</button>
     <h1>
         <span class="lang-en active">🎉 Good job! 🎉</span>
         <span class="lang-es">🎉 ¡Buen trabajo! 🎉</span>
@@ -318,10 +346,10 @@ CONGRATS_TEMPLATE = """<!DOCTYPE html>
             const toggleBtn = document.querySelector('.lang-toggle');
             if (currentLang === 'en') {{
                 currentLang = 'es';
-                toggleBtn.textContent = '🇺🇸 English';
+                toggleBtn.textContent = 'English';
             }} else {{
                 currentLang = 'en';
-                toggleBtn.textContent = '🇨🇴 Español';
+                toggleBtn.textContent = 'Español';
             }}
             updateLanguage(currentLang);
         }}
@@ -340,7 +368,7 @@ CONGRATS_TEMPLATE = """<!DOCTYPE html>
             const savedLang = localStorage.getItem('preferredLanguage') || 'en';
             currentLang = savedLang;
             if (savedLang === 'es') {{
-                document.querySelector('.lang-toggle').textContent = '🇺🇸 English';
+                document.querySelector('.lang-toggle').textContent = 'English';
             }}
             updateLanguage(savedLang);
         }});
@@ -404,12 +432,12 @@ for opt in config.get("options", []):
         # Generate media HTML (use 'en' for the alt text since we show both languages in the image)
         media = generate_media_html(step, 'en')
 
-        # Navigation links (same for both languages)
-        prev_link = f'<a href="{opt["id"]}_step{i-1}.html" class="button">⬅ Previous</a>' if i > 1 else ""
+        # Navigation links (now bilingual)
+        prev_link = f'<a href="{opt["id"]}_step{i-1}.html" class="button"><span class="lang-en active">⬅ Previous</span><span class="lang-es">⬅ Anterior</span></a>' if i > 1 else ""
         if i < total:
-            next_link = f'<a href="{opt["id"]}_step{i+1}.html" class="button">Next ➔</a>'
+            next_link = f'<a href="{opt["id"]}_step{i+1}.html" class="button"><span class="lang-en active">Next ➔</span><span class="lang-es">Siguiente ➔</span></a>'
         else:
-            next_link = f'<a href="{opt["id"]}_congrats.html" class="button">Finish ➔</a>'
+            next_link = f'<a href="{opt["id"]}_congrats.html" class="button"><span class="lang-en active">Finish ➔</span><span class="lang-es">Finalizar ➔</span></a>'
 
         filename = f"{opt['id']}_step{i}.html"
         page = STEP_TEMPLATE.format(
